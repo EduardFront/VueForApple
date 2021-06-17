@@ -1,11 +1,12 @@
 <template>
   <div class="List">
-    {{TestList}}
+    <TestView v-for="(Test, index) in TestList.data" :key = "index" v-bind:Test="Test"/>
   </div>
 </template>
 
 <script>
 import db from './db'
+import TestView from "./TestView"
 
 export default {
   name:'TestList',
@@ -17,6 +18,9 @@ export default {
   },
   async mounted() {
     this.TestList = await db.Get("Test?",[[]])
+  },
+  components: {
+    TestView
   }
 };
 </script>
